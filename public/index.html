@@ -10,28 +10,46 @@
         <script type="text/javascript" src="app.js"></script>
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     </head>
     <body ng-app="App" ng-controller="padrao" >
         <div class="container" >
-            <div class="row well mtop">
-                <div class="col-sm-9" >
-                    <input type="text" ng-model="nome" class="form-control" />
-                </div>
-                <div class="col-sm-3">
-                    <input type="button" value="Cadastrar" ng-click="adicionar()" class="form-control btn btn-default" />
+            <div class="row search_box" >
+                <div class="col-md-12">
+                    <form class="form-inline">
+                        <input type="text" class="form-control input-lg" ng-model="todo.descricao" id="descricao" placeholder="Tarefa">
+                        <button type="button" ng-click="adicionar()" ng-disabled="todo.descricao == ''" class="btn btn-default btn-lg ">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-            
-            <div class="row" ng-repeat="item in lista">
-                <div class="col-sm-8">
-                    <input type="text" ng-model="item.descricao" class="form-control" />
+            <br />
+            <div class="row loading" ng-show="loading">
+                <div class="col-md-6 col-md-offset-3">
+                    <h1><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></h1>
                 </div>
-                <div class="col-sm-2">
-                    <input type="button" value="Editar" ng-click="editar($index,item)" class="form-control btn btn-primary" />
-                </div>
-                <div class="col-sm-2">
-                    <input type="button" value="Remover" ng-click="remover($index)" class="form-control btn btn-danger" />
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4" ng-repeat="item in lista">
+                    <div ng-class="{'card':true, 'done': item.pronto}">
+                        <h4 ng-show="editingItem != $index">{{item.descricao}}</h4>
+                        <form class="form-inline" ng-show="editingItem == $index">
+                            <input type="text" ng-model="item.descricao" class="form-control input-sm"  />
+                            <button class="btn btn-default btn-primary btn-sm"
+                                    ng-disabled="item.descricao == ''"
+                                    ng-click="update(item)" ><i class="fa fa-check-square" aria-hidden="true"></i></button>
+                        </form>
+
+                        <div class="action_bar">
+                            <button class="btn btn-default" ng-click="done(item)" ng-disabled="item.pronto || editingItem == $index"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>
+                            <button class="btn btn-default" ng-click="editarItem($index)" ng-disabled="item.pronto || editingItem == $index"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <button class="btn btn-default" ng-click="remover(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             

@@ -10,3 +10,6 @@ libraryDependencies += javaJdbc
 libraryDependencies += cache
 libraryDependencies += javaWs
 libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.18.0"
+libraryDependencies += "com.google.guava" % "guava" % "12.0"
+libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.0.1"
+libraryDependencies += "org.mockito" % "mockito-all" % "1.9.5" % "test"

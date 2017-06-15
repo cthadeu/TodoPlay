@@ -9,11 +9,13 @@
 # An example controller showing how to write asynchronous code
 #GET     /message                    controllers.AsyncController.message
 
+GET      /api/itens          controllers.TodoItemController.index()
+GET      /api/itens/:id      controllers.TodoItemController.getById(id: Integer)
+POST     /api/itens          controllers.TodoItemController.insert()
+PUT      /api/itens          controllers.TodoItemController.update()
+DELETE   /api/itens/:id      controllers.TodoItemController.delete(id: Integer)
 
-GET     /api/itens          controllers.Itens.index()
-POST     /api/itens          controllers.Itens.insert()
-POST     /api/itens/edit          controllers.Itens.edit()
 
-
+GET      /                  controllers.Assets.at(path="/public", file="/index.html")
 # Map static resources from the /public folder to the /assets URL path
 GET     /*file               controllers.Assets.versioned(path="/public", file: Asset)
